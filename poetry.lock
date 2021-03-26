@@ -141,10 +141,6 @@ requests = ">=2.18.0,<3.0.0dev"
 setuptools = ">=40.3.0"
 six = ">=1.13.0"
 
-[package.dependencies.grpcio]
-optional = true
-version = ">=1.29.0,<2.0dev"
-
 [package.extras]
 grpc = ["grpcio (>=1.29.0,<2.0dev)"]
 grpcgcp = ["grpcio-gcp (>=0.2.2)"]
@@ -171,6 +167,26 @@ version = ">=3.1.4,<5"
 [package.extras]
 aiohttp = ["aiohttp (>=3.6.2,<4.0.0dev)"]
 pyopenssl = ["pyopenssl (>=20.0.0)"]
+
+[[package]]
+category = "main"
+description = "Cloud AutoML API client library"
+name = "google-cloud-automl"
+optional = false
+python-versions = ">=3.6"
+version = "2.2.0"
+
+[package.dependencies]
+libcst = ">=0.2.5"
+proto-plus = ">=1.10.0"
+
+[package.dependencies.google-api-core]
+extras = ["grpc"]
+version = ">=1.22.0,<2.0.0dev"
+
+[package.extras]
+pandas = ["pandas (>=0.17.1)"]
+storage = ["google-cloud-storage (>=1.18.0,<2.0.0dev)"]
 
 [[package]]
 category = "main"
@@ -416,6 +432,17 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xm
 
 [[package]]
 category = "main"
+description = "A streaming multipart parser for Python"
+name = "python-multipart"
+optional = false
+python-versions = "*"
+version = "0.0.5"
+
+[package.dependencies]
+six = ">=1.4.0"
+
+[[package]]
+category = "main"
 description = "World timezone definitions, modern and historical"
 name = "pytz"
 optional = false
@@ -552,7 +579,7 @@ h11 = ">=0.8"
 standard = ["websockets (>=8.0.0,<9.0.0)", "watchgod (>=0.6)", "python-dotenv (>=0.13)", "PyYAML (>=5.1)", "httptools (>=0.1.0,<0.2.0)", "uvloop (>=0.14.0,<0.15.0 || >0.15.0,<0.15.1 || >0.15.1)", "colorama (>=0.4)"]
 
 [metadata]
-content-hash = "e7722d4d6babad80d4b57b96641d914a486084c255e36583790e58c1e5d3838c"
+content-hash = "62cd94f85dde37f66cdf641e1846adc6bee3b798d7bc4b861f7af651c10c5bb9"
 lock-version = "1.0"
 python-versions = "^3.8"
 
@@ -607,6 +634,10 @@ google-api-core = [
 google-auth = [
     {file = "google-auth-1.28.0.tar.gz", hash = "sha256:9bd436d19ab047001a1340720d2b629eb96dd503258c524921ec2af3ee88a80e"},
     {file = "google_auth-1.28.0-py2.py3-none-any.whl", hash = "sha256:dcaba3aa9d4e0e96fd945bf25a86b6f878fcb05770b67adbeb50a63ca4d28a5e"},
+]
+google-cloud-automl = [
+    {file = "google-cloud-automl-2.2.0.tar.gz", hash = "sha256:874defad583e90e55a3e83aff27eb5fe108d9197d839cd45f3eacf2395881806"},
+    {file = "google_cloud_automl-2.2.0-py2.py3-none-any.whl", hash = "sha256:5d6dcc50c650f195d16ff2c59d5dcec2e288c5c15071ad5673fb71529aa9ccfb"},
 ]
 google-cloud-vision = [
     {file = "google-cloud-vision-2.2.0.tar.gz", hash = "sha256:9a205be275739c141873fa9fbd7c3f9ec6170972c85d5c75e9b4c53b5db839a3"},
@@ -799,6 +830,9 @@ pyparsing = [
 pytest = [
     {file = "pytest-6.2.2-py3-none-any.whl", hash = "sha256:b574b57423e818210672e07ca1fa90aaf194a4f63f3ab909a2c67ebb22913839"},
     {file = "pytest-6.2.2.tar.gz", hash = "sha256:9d1edf9e7d0b84d72ea3dbcdfd22b35fb543a5e8f2a60092dd578936bf63d7f9"},
+]
+python-multipart = [
+    {file = "python-multipart-0.0.5.tar.gz", hash = "sha256:f7bb5f611fc600d15fa47b3974c8aa16e93724513b49b5f95c81e6624c83fa43"},
 ]
 pytz = [
     {file = "pytz-2021.1-py2.py3-none-any.whl", hash = "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"},
