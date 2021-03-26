@@ -10,6 +10,9 @@ fastapi = "^0.63.0"
 requests = "^2.25.1"
 uvicorn = "^0.13.4"
 google-cloud-vision = "^2.2.0"
+python-multipart = "^0.0.5"
+google-cloud-automl = "^2.2.0"
+grpcio = "^1.36.1"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^20.8b1", allow-prereleases = true}
