@@ -1,0 +1,21 @@
+{
+    /* Your other settings go here */
+    "eslint.run": "onType",
+    "eslint.validate": [
+        "vue",
+        "html",
+        "javascript"
+    ],
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll": true
+    },
+    "vetur.format.defaultFormatter.html": "none",
+    "[vue]": {},
+    "eslint.alwaysShowStatus": true,
+    "vetur.format.defaultFormatter.js": "none",
+    "vetur.format.defaultFormatter.scss": "none",
+    "vetur.format.defaultFormatter.ts": "none",
+    "vetur.format.enable": false
+}
