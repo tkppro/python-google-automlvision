@@ -36,7 +36,7 @@
 
                 <v-stepper-items>
                   <v-stepper-content step="1">
-                    <v-card class="mb-12" color="lighten-1" height="300px">
+                    <v-card class="mb-12" color="lighten-1" height="350px">
                       <v-row
                         class="d-flex flex-column justify-center align-center"
                       >
@@ -69,7 +69,7 @@
                             <v-card>
                               <v-card-title>Select Image</v-card-title>
                               <v-divider></v-divider>
-                              <v-card-text style="height: 400px;">
+                              <v-card-text style="height: 350px;">
                                 <v-radio-group v-model="image_select" row>
                                   <v-col
                                     cols="3"
@@ -123,7 +123,7 @@
                   </v-stepper-content>
 
                   <v-stepper-content step="2">
-                    <v-card class="mb-12" color="lighten-1" height="300px">
+                    <v-card class="mb-12" color="lighten-1" height="350px">
                       <v-radio-group v-model="predict_type" row>
                         <v-col cols="6">
                           <v-radio
@@ -150,7 +150,7 @@
                   </v-stepper-content>
 
                   <v-stepper-content step="3">
-                    <v-card class="mb-12" color="lighten-1" height="300px">
+                    <v-card class="mb-12" color="lighten-1" height="350px">
                       <v-img
                         :src="
                           parse_base64_image

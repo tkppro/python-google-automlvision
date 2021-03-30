@@ -1,15 +1,14 @@
-import uvicorn
 from fastapi import FastAPI, File, APIRouter, HTTPException, Body
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
+from starlette.staticfiles import StaticFiles
 
 from python_automl_vision.services.services import (
-    detect_labels_uri,
-    detect_labels_file,
     predict,
     batch_predict,
     get_batch_status,
     get_sample_online_predict,
+    generate_batch_test_file,
 )
 
 app = FastAPI(
@@ -69,6 +68,13 @@ async def sample_online_predict():
     return results
 
 
-if __name__ == "__main__":
-    app.include_router(api, prefix="/api")
-    uvicorn.run(app, host="0.0.0.0", port=8003)
+@api.post("/generate")
+async def generate_test_csv():
+    results = generate_batch_test_file()
+    return results
+
+
+# if __name__ == "__main__":
+app.include_router(api, prefix="/api")
+app.mount("/", StaticFiles(directory="static/dist", html=True), name="static")
+# uvicorn.run(app, host="0.0.0.0", port=8003)
