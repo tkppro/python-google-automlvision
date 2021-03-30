@@ -1,17 +1,14 @@
-from google.cloud import vision
-from google.cloud import automl
-from google.cloud import storage
 import csv
 import io
-from google.protobuf.json_format import MessageToDict
 import os
 
-project_id = "sproject-3697d"
-model_id = "ICN5334859005271474176"
-bucket_name = "automl-vision-dataset-images"
-test_dir = "tests/"
+from google.cloud import vision
+from google.protobuf.json_format import MessageToDict
+
+from ..config import *
+
 gsutil = "gs://{}/{}"
-batch_results_dir = "/batch-prediction-results"
+public_image_url = "https://storage.googleapis.com/{}/{}"
 
 
 def detect_labels_uri(uri):
@@ -73,10 +70,10 @@ def detect_labels_file(content):
 def predict(content, is_uploaded=True, blob="", predict_type="ONLINE_PREDICTION"):
     if predict_type == "BATCH_PREDICTION":
         return batch_predict()
-    prediction_client = automl.PredictionServiceClient()
+
     file_download = ""
     # Get the full path of the model.
-    model_full_id = automl.AutoMlClient.model_path(project_id, "us-central1", model_id)
+    model_full_id = automl.AutoMlClient.model_path(PROJECT_ID, "us-central1", MODEL_ID)
     if not is_uploaded:
         file_download = download_file(blob)
         with io.open(file_download, "rb") as image_file:
@@ -103,17 +100,15 @@ def predict(content, is_uploaded=True, blob="", predict_type="ONLINE_PREDICTION"
 
 
 def generate_batch_test_file():
-    storage_client = storage.Client()
-
-    bucket = storage_client.get_bucket(bucket_name)
-    blobs = bucket.list_blobs(prefix=test_dir, delimiter="/")
+    bucket = storage_client.get_bucket(BUCKET_NAME)
+    blobs = bucket.list_blobs(prefix=TEST_DIR, delimiter="/")
     result = [
-        gsutil.format(bucket_name, blob.name) for blob in blobs if blob.name != test_dir
+        gsutil.format(BUCKET_NAME, blob.name) for blob in blobs if blob.name != TEST_DIR
     ]
     with open("./batch_prediction.csv", mode="w") as csv_file:
         csv_writer = csv.writer(
             csv_file,
-            delimiter=" ",
+            delimiter="\n",
             quotechar="|",
             quoting=csv.QUOTE_MINIMAL,
             lineterminator="\n",
@@ -121,20 +116,18 @@ def generate_batch_test_file():
         # for item in result:
         csv_writer.writerow(result)
 
-    upload_blob = bucket.blob(test_dir)
+    upload_blob = bucket.blob(TEST_DIR)
     upload_blob.upload_from_filename("./batch_prediction.csv")
 
 
 def batch_predict():
-    prediction_client = automl.PredictionServiceClient()
-
-    model_full_id = automl.AutoMlClient.model_path(project_id, "us-central1", model_id)
-    input_uri = gsutil.format(bucket_name, "tests/batch_prediction.csv")
+    model_full_id = automl.AutoMlClient.model_path(PROJECT_ID, "us-central1", MODEL_ID)
+    input_uri = gsutil.format(BUCKET_NAME, "tests/batch_prediction.csv")
     gcs_source = automl.GcsSource(input_uris=[input_uri])
 
     input_config = automl.BatchPredictInputConfig(gcs_source=gcs_source)
     gcs_destination = automl.GcsDestination(
-        output_uri_prefix=gsutil.format(bucket_name, batch_results_dir)
+        output_uri_prefix=gsutil.format(BUCKET_NAME, BATCH_RESULTS_DIR)
     )
     output_config = automl.BatchPredictOutputConfig(gcs_destination=gcs_destination)
 
@@ -154,8 +147,6 @@ def get_batch_status():
         "projects/864689882485/locations/us-central1/operations/ICN1108187049397059584"
     )
 
-    prediction_client = automl.PredictionServiceClient()
-
     r = prediction_client.transport.operations_client.get_operation(
         name=operation_full_id
     )
@@ -165,22 +156,19 @@ def get_batch_status():
 
 
 def get_sample_online_predict():
-    storage_client = storage.Client()
-    public_image_url = "https://storage.googleapis.com/{}/{}"
-    bucket = storage_client.get_bucket(bucket_name)
-    blobs = bucket.list_blobs(prefix=test_dir, delimiter="/")
+    bucket = storage_client.get_bucket(BUCKET_NAME)
+    blobs = bucket.list_blobs(prefix=TEST_DIR, delimiter="/")
     result = [
-        dict(url=public_image_url.format(bucket_name, blob.name), blob_name=blob.name)
+        dict(url=public_image_url.format(BUCKET_NAME, blob.name), blob_name=blob.name)
         for blob in blobs
-        if blob.name != test_dir and not blob.name.endswith(".csv")
+        if blob.name != TEST_DIR and not blob.name.endswith(".csv")
     ]
 
     return result
 
 
 def download_file(blob_name):
-    storage_client = storage.Client()
-    bucket = storage_client.get_bucket(bucket_name)
+    bucket = storage_client.get_bucket(BUCKET_NAME)
     blob = bucket.blob(blob_name)
     file_download = f"./download/{blob.name.split('/')[1]}"
     blob.download_to_filename(file_download)

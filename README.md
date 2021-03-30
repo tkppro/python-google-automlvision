@@ -9,9 +9,15 @@ poetry install
 ``
 
 ``
-export GOOGLE_APPLICATION_CREDENTIALS=`$PATH`
+uvicorn main:app --reload --host 0.0.0.0
+``
+
+
+#Build
+``
+docker build . -t automl-vision
 ``
 
 ``
-uvicorn main:app --reload --port 8003
+gcloud builds submit --tag gcr.io/sproject-3697d/automl-vision
 ``
