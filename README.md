@@ -102,7 +102,6 @@ With the rapid development of technology, a Data Scientist could archive their j
 
     ![](./imgs/import-dataset.png)
 
-    Figure 3: Import screen
 
     - Create 2 labels with the name: dog and cat.
     - Labelling these unlabelled images with appropriate dog or cat
@@ -111,7 +110,6 @@ With the rapid development of technology, a Data Scientist could archive their j
 
     ![](./imgs/train.png)
 
-    Figure 4: Train model options
 
     There are 2 options:
 
@@ -138,13 +136,11 @@ With the rapid development of technology, a Data Scientist could archive their j
 
     ![](imgs/evaluate.png)
 
-    Figure 6: Evaluate model
 
     - Let&#39;s test our model. Input any picture and see the result.
 
     ![](./imgs/test.png)
 
-    Figure 7: Test model
 
     Cool, our model is quite accurate. Next step, we will build a Web Application so anyone can perform online prediction.
 
