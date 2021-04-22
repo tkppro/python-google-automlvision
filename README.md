@@ -254,7 +254,8 @@ With the rapid development of technology, a Data Scientist could archive their j
     Let&#39;s create a new frontend application inside folder static.
     ```bash
     $ cd static
-    $ npm i -g @vue/cli$ vue create frontend
+    $ npm i -g @vue/cli
+    $ vue create frontend
     ```
 
     I will use [Vuetify](https://vuetifyjs.com/en/) to build our view. Run command to install Vuetify:
