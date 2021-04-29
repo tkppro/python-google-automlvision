@@ -1,6 +1,6 @@
 # Introduction to Google Cloud AutoML Vision
 
-With the rapid development of technology, a Data Scientist could archive their job like training ML models faster. The Word &quot;AutoML&quot;(also known as Automated machine learning) comes and now plays a crucial role in studying ML. Their work has been promoted to a new level compared with the traditional way of creating an ML model. The three big cloud platforms(GCP, Azure, AWS) now provided a variety of resources for Machine learning, especially AutoML. This blog will go through from introduction to AutoML to create an AutoML application.
+With the rapid development of technology, a Data Scientist could achieve their job like training ML models faster. The Word &quot;AutoML&quot;(also known as Automated machine learning) comes and now plays a crucial role in studying ML. Their work has been promoted to a new level compared with the traditional way of creating an ML model. The three big cloud platforms(GCP, Azure, AWS) now provided a variety of resources for Machine learning, especially AutoML. This blog will go through from introduction to AutoML to create an AutoML application.
 
 1. **Introduction:**
 
